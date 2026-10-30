@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greens Group | Land & Development Feasibility</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables - Greens Group Logo Theme */
+        :root {
+            --bg-main: #FDFBF7;
+            --white: #FFFFFF;
+            --text-dark: #0A2612;
+            --text-muted: #5C7063;
+            --brand-green: #083315;
+            --brand-green-light: #E8F5E9;
+            --brand-accent: #D97706;
+            --brand-accent-light: #FEF3C7;
+            --border-light: #E5E7EB;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; }
+        .serif-italic { font-family: "Georgia", serif; font-style: italic; font-weight: normal; color: var(--brand-green); }
+        
+        .kicker {
+            color: var(--brand-accent);
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Navbar */
+        .navbar-wrapper {
+            position: fixed; top: 20px; left: 0; width: 100%;
+            display: flex; justify-content: center; z-index: 1000; padding: 0 20px;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            border-radius: 100px; padding: 10px 24px;
+            display: flex; align-items: center; gap: 40px; box-shadow: 0 4px 20px rgba(8, 51, 21, 0.08);
+            width: 100%; max-width: 1100px; justify-content: space-between;
+            border: 1px solid rgba(217, 119, 6, 0.1);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--brand-green); text-decoration: none; display: flex; align-items: center; font-family: "Georgia", serif; letter-spacing: 1px; }
+        .logo i { color: var(--brand-accent); margin-right: 8px; font-size: 1.2rem; }
+        .logo span { color: var(--brand-accent); font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 0.55em; font-weight: 700; letter-spacing: 2px; margin-left: 8px; text-transform: uppercase; }
+
+        .nav-links { display: flex; gap: 24px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--brand-accent); }
+
+        .btn {
+            background: var(--brand-green); color: var(--white); padding: 12px 24px;
+            border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            transition: all 0.3s; border: none; cursor: pointer; display: inline-block;
+            box-shadow: 0 4px 12px rgba(8, 51, 21, 0.2);
+        }
+        .btn:hover { background: var(--brand-accent); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(217, 119, 6, 0.3); }
+
+        /* General Section Layout */
+        .section-container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
+
+        /* --- SECTION 1: HERO --- */
+        .hero {
+            position: relative; padding-top: 160px; text-align: center;
+            background: linear-gradient(to bottom, #E8F5E9 0%, var(--bg-main) 100%); overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 40%;
+            background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80') center/cover;
+            opacity: 0.4; z-index: 0; -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 750px; margin: 0 auto; }
+        .hero h1 { font-size: 4.2rem; line-height: 1.1; margin-bottom: 24px; color: var(--brand-green); }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 40px; }
+        .hero-actions { display: flex; gap: 16px; justify-content: center; align-items: center; margin-bottom: 60px; }
+        .hero-actions a.link-outline { color: var(--brand-accent); text-decoration: none; font-weight: 700; transition: color 0.2s; }
+        .hero-actions a.link-outline:hover { color: var(--brand-green); }
+        .hero-dashboard {
+            position: relative; z-index: 2; max-width: 900px; margin: 0 auto;
+            background: var(--brand-green); border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            padding: 24px; box-shadow: 0 25px 50px -12px rgba(8, 51, 21, 0.4);
+            border: 4px solid var(--brand-accent); border-bottom: none; height: 350px;
+            color: var(--white); text-align: left;
+        }
+
+        /* --- SECTION 2: THE PROBLEM --- */
+        .problem-section { text-align: center; }
+        .problem-section h2 { font-size: 3rem; margin-bottom: 64px; color: var(--brand-green); }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .info-card {
+            background: var(--white); padding: 40px 32px; border-radius: var(--radius-lg);
+            text-align: left; box-shadow: 0 10px 30px rgba(8, 51, 21, 0.03); border: 1px solid var(--border-light);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .info-card:hover { transform: translateY(-5px); border-color: var(--brand-accent); }
+        .info-card i { font-size: 1.8rem; color: var(--brand-accent); margin-bottom: 20px; display: block; }
+        .info-card h3 { font-size: 1.25rem; margin-bottom: 12px; color: var(--brand-green); }
+        .info-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* --- SECTION 3: FEATURES --- */
+        .features-section { text-align: center; }
+        .features-section h2 { font-size: 3rem; margin-bottom: 64px; color: var(--brand-green); }
+        .feature-row {
+            background: var(--white); border-radius: var(--radius-xl); padding: 40px;
+            display: flex; align-items: center; gap: 40px; margin-bottom: 32px;
+            border: 1px solid var(--border-light); text-align: left; box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+        .feature-text { flex: 1; }
+        .feature-visual { 
+            flex: 1; background: var(--brand-green-light); border-radius: var(--radius-lg);
+            height: 300px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+        }
+        .tag {
+            background: var(--brand-accent-light); color: var(--brand-accent); padding: 6px 14px;
+            border-radius: 100px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 16px; display: inline-block;
+        }
+        .feature-text h3 { color: var(--brand-green); font-size: 1.75rem; margin-bottom: 16px; }
+        .check-list { list-style: none; }
+        .check-list li { position: relative; padding-left: 28px; margin-bottom: 12px; font-size: 0.95rem; color: var(--text-dark); font-weight: 500; }
+        .check-list li::before { content: '\f00c'; font-family: 'FontAwesome'; position: absolute; left: 0; top: 2px; color: var(--brand-accent); font-size: 1.1em; }
+
+        /* --- SECTION 4: HOW IT WORKS --- */
+        .how-it-works { text-align: center; }
+        .how-it-works h2 { font-size: 3rem; margin-bottom: 16px; color: var(--brand-green); }
+        .how-it-works > p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 64px; }
+        .split-layout { display: flex; gap: 60px; text-align: left; align-items: flex-start; }
+        .stepper { flex: 1; border-left: 2px solid var(--border-light); padding-left: 32px; display: flex; flex-direction: column; gap: 40px; }
+        .step { position: relative; cursor: pointer; opacity: 0.4; transition: opacity 0.3s; }
+        .step.active { opacity: 1; }
+        .step::before {
+            content: ''; position: absolute; left: -33px; top: 0; width: 3px; height: 100%;
+            background: var(--brand-accent); transform: scaleY(0); transform-origin: top; transition: transform 0.3s;
+        }
+        .step.active::before { transform: scaleY(1); }
+        .step-num { font-size: 0.85rem; font-weight: 800; color: var(--brand-accent); margin-bottom: 8px; display: block; }
+        .step h3 { font-size: 1.75rem; margin-bottom: 12px; color: var(--brand-green); }
+        .step p { color: var(--text-muted); font-size: 1rem; display: none; }
+        .step.active p { display: block; }
+        .interactive-ui { flex: 1.2; background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--border-light); box-shadow: 0 10px 40px rgba(8, 51, 21, 0.08); overflow: hidden; border-top: 4px solid var(--brand-accent); }
+        .ui-header { background: var(--bg-main); padding: 12px 20px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .ui-dots span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #D1D5DB; margin-right: 4px; }
+        .ui-body { padding: 32px; display: flex; gap: 24px; }
+        .ui-table { flex: 1; font-size: 0.95rem; color: var(--text-dark); }
+        .ui-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-light); }
+        .ui-row.bold { font-weight: 700; border-bottom: 2px solid var(--border-light); color: var(--brand-green); }
+        .ui-row.highlight { background: var(--brand-green-light); padding: 12px; border-radius: 6px; border: none; margin-top: 12px; font-weight: 700; color: var(--brand-green); }
+        .ui-graphic { flex: 1; background: #F3F4F6; border: 2px solid var(--brand-green); border-radius: 8px; position: relative; }
+
+        /* --- SECTION 5: QUICK CHECK --- */
+        .quick-check-wrapper { background-color: var(--brand-green); padding: 100px 20px; text-align: center; position: relative; }
+        .quick-check-wrapper::before { content: ''; position: absolute; top: -50%; left: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(217, 119, 6, 0.15) 0%, transparent 70%); }
+        .quick-check-wrapper h2 { color: var(--white); margin-bottom: 64px; font-weight: normal; font-size: 2.2rem; position: relative; z-index: 2; }
+        .qc-container {
+            background: var(--white); max-width: 1100px; margin: 0 auto; border-radius: var(--radius-xl);
+            padding: 40px; display: flex; gap: 40px; text-align: left; box-shadow: 0 20px 50px rgba(0,0,0,0.25); position: relative; z-index: 2;
+        }
+        .qc-form { flex: 1.1; }
+        .qc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+        .live-badge { background: var(--brand-accent-light); color: var(--brand-accent); padding: 6px 12px; border-radius: 100px; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 1px; }
+        .live-badge::before { content: ''; width: 6px; height: 6px; background: var(--brand-accent); border-radius: 50%; box-shadow: 0 0 8px var(--brand-accent); }
+        .qc-toggle { display: inline-flex; background: var(--bg-main); border-radius: 100px; padding: 4px; margin-bottom: 24px; border: 1px solid var(--border-light); }
+        .qc-toggle-btn { padding: 10px 20px; border-radius: 100px; font-size: 0.9rem; font-weight: 600; cursor: pointer; color: var(--text-dark); transition: 0.2s; }
+        .qc-toggle-btn.active { background: var(--brand-green); color: var(--white); }
+        .qc-input-group { margin-bottom: 24px; }
+        .qc-row { display: flex; gap: 20px; }
+        .qc-col { flex: 1; }
+        .qc-label { display: block; font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; }
+        .qc-input { width: 100%; padding: 14px 16px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 1rem; background: #FBFBFA; outline: none; transition: border 0.2s; font-weight: 500; }
+        .qc-input:focus { border-color: var(--brand-accent); box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1); }
+        .qc-helper { font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; display: block; line-height: 1.4; }
+        .switch-wrap { display: flex; align-items: center; gap: 12px; margin-top: 24px; font-size: 0.9rem; color: var(--text-dark); font-weight: 500; }
+        .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #D1D5DB; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--brand-accent); }
+        input:checked + .slider:before { transform: translateX(20px); }
+        .qc-results { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+        .verdict-card { background: #FFF7ED; border-radius: var(--radius-lg); padding: 32px; display: flex; align-items: center; gap: 24px; border: 1px solid #FFEDD5; }
+        .verdict-score { width: 90px; height: 90px; border-radius: 50%; background: var(--white); display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; border: 2px solid #FED7AA; }
+        .verdict-score span:first-child { font-size: 2.2rem; font-weight: 800; color: var(--brand-accent); }
+        .verdict-score span:last-child { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; font-weight: 600;}
+        .verdict-text .badge { background: #DC2626; color: white; padding: 4px 12px; border-radius: 100px; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 12px; letter-spacing: 0.05em; }
+        .verdict-text .badge::before { content: ''; width: 6px; height: 6px; background: white; border-radius: 50%; }
+        .verdict-text p { color: #991B1B; font-size: 1rem; margin: 0; font-weight: 500; }
+        .stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        .stat-box { border: 1px solid var(--border-light); border-radius: 12px; padding: 20px 16px; background: var(--bg-main); text-align: center; }
+        .stat-box .label { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; display: block; font-weight: 600; }
+        .stat-box .value { font-size: 1.25rem; font-weight: 800; color: var(--brand-green); }
+        .offer-banner { background: var(--brand-green); color: white; border-radius: 12px; padding: 24px; display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-left: 4px solid var(--brand-accent); }
+        .offer-banner .label { font-size: 1rem; font-weight: 600; }
+        .offer-banner .value { font-size: 2rem; font-weight: 800; color: var(--brand-accent); }
+
+        /* --- SECTION 6: DEAL TYPES --- */
+        .deal-types-wrapper { background-color: var(--white); padding: 100px 0; overflow: hidden; border-bottom: 1px solid var(--border-light); }
+        .deal-types-layout { display: flex; align-items: center; gap: 60px; }
+        .deal-text { flex: 0 0 35%; }
+        .deal-text h2 { font-size: 3rem; margin-bottom: 24px; line-height: 1.1; color: var(--brand-green); }
+        .deal-text p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 32px; }
+        .carousel-nav { display: flex; gap: 12px; }
+        .carousel-nav button {
+            width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--border-light); background: var(--white);
+            cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--brand-green); transition: 0.2s; font-size: 1.1rem;
+        }
+        .carousel-nav button:hover { background: var(--brand-accent); color: var(--white); border-color: var(--brand-accent); }
+        .deal-carousel { flex: 1; display: flex; gap: 24px; overflow-x: auto; padding-bottom: 20px; scrollbar-width: none; }
+        .deal-carousel::-webkit-scrollbar { display: none; }
+        .deal-card { flex: 0 0 340px; background: var(--bg-main); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-light); box-shadow: 0 10px 20px rgba(0,0,0,0.03); transition: transform 0.3s; }
+        .deal-card:hover { transform: translateY(-5px); border-color: var(--brand-accent); }
+        .deal-card img { width: 100%; height: 220px; object-fit: cover; }
+        .deal-card-content { padding: 32px 24px; }
+        .deal-tags { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .tag-small { font-size: 0.75rem; font-weight: 700; color: var(--brand-accent); text-transform: uppercase; letter-spacing: 1px; }
+        .tag-beta { background: var(--brand-green-light); color: var(--brand-green); padding: 4px 10px; border-radius: 100px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; }
+        .deal-card h3 { font-size: 1.4rem; margin-bottom: 12px; color: var(--brand-green); }
+        .deal-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* --- SECTION 7: CTA & FOOTER --- */
+        .bottom-cta {
+            position: relative;
+            padding: 140px 20px;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: var(--white);
+        }
+        .bottom-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(8, 51, 21, 0.85); /* Deep green overlay */
+        }
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .cta-content h2 {
+            font-size: 4.5rem;
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+            color: var(--brand-accent);
+        }
+        .cta-content p {
+            font-size: 1.15rem;
+            margin-bottom: 40px;
+            color: #E5E7EB;
+            font-family: "Georgia", serif;
+        }
+        .cta-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        .btn-white {
+            background: var(--brand-accent);
+            color: var(--white);
+            padding: 14px 32px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+        }
+        .btn-white:hover { background: #b45f04; transform: translateY(-2px); }
+        .btn-outline-white {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.4);
+            padding: 12px 32px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-outline-white:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--white);
+        }
+
+        .footer {
+            background: #051A0A; /* Even darker green for footer */
+            color: var(--white);
+            padding: 80px 20px 60px;
+            border-top: 4px solid var(--brand-accent);
+        }
+        .footer-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--white);
+            font-family: "Georgia", serif;
+            letter-spacing: 1px;
+        }
+        .footer-logo i { color: var(--brand-accent); margin-right: 10px; font-size: 1.5rem; }
+        .footer-logo span { color: var(--brand-accent); font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 0.5em; font-weight: 700; letter-spacing: 2px; margin-left: 8px; text-transform: uppercase; }
+        
+        .footer-tagline {
+            font-family: "Georgia", serif;
+            font-style: italic;
+            color: #9CA3AF;
+            font-size: 1rem;
+            margin-top: 10px;
+            max-width: 250px;
+        }
+        .footer-col h4 {
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            color: var(--brand-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-col li {
+            margin-bottom: 16px;
+        }
+        .footer-col a {
+            color: #D1D5DB;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+        .footer-col a:hover {
+            color: var(--brand-accent);
+        }
+
+        /* Responsive Global */
+        @media (max-width: 900px) {
+            .navbar { display: none; }
+            .feature-row { flex-direction: column; }
+            .split-layout { flex-direction: column; }
+            .qc-container { flex-direction: column; }
+            .deal-types-layout { flex-direction: column; align-items: flex-start; }
+            .deal-text { flex: none; width: 100%; }
+            .deal-carousel { width: 100%; }
+            .cta-content h2 { font-size: 3rem; }
+            .cta-actions { flex-direction: column; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+            .footer-brand { grid-column: span 2; margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1: HERO & NAVBAR -->
+    <div class="navbar-wrapper">
+        <nav class="navbar">
+            <a href="#" class="logo"><i class="fas fa-sun"></i> GREENS<span>GROUP</span></a>
+            <ul class="nav-links">
+                <li><a href="#">Why Greens</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Blogs</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            <a href="#" class="btn">Evaluate a Deal</a>
+        </nav>
+    </div>
+
+    <section class="hero">
+        <div class="section-container" style="padding-bottom: 0;">
+            <div class="hero-content">
+                <span class="kicker">Land & Development Feasibility</span>
+                <h1>Is the land <br>actually <span class="serif-italic">profitable</span>?</h1>
+                <p>Get your verdict and the most you should pay for the land <span class="serif-italic">in minutes</span>, before you spend weeks on spreadsheets and consultants.</p>
+                <div class="hero-actions">
+                    <a href="#" class="btn">Start your 14-day free trial</a>
+                    <a href="#" class="link-outline">See how it works</a>
+                </div>
+            </div>
+            
+            <div class="hero-dashboard">
+                <div style="opacity: 0.8; font-size: 0.8rem; margin-bottom: 10px; display: flex; gap: 10px;">
+                    <span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 4px; font-weight: bold; letter-spacing: 1px;">ASSESSMENT</span>
+                    <span>Land Development / Build to Sell</span>
+                </div>
+                <h2>Build to Sell Project</h2>
+                <p style="color: #9CA3AF; font-size: 0.9rem; margin-bottom: 30px;">1234 College Ave, San Angelo, TX 76901 · Single-family, build to sell</p>
+                
+                <div style="display: flex; gap: 20px; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; border: 4px solid var(--brand-accent); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: var(--brand-accent);">92</div>
+                    <div>
+                        <h3 style="color: var(--brand-accent); margin-bottom: 5px;">This one's worth a closer look.</h3>
+                        <p style="font-size: 0.85rem; color: #D1D5DB;">Fundamentals support advancing status: Asset margin is > 20% and covers costs for debt service...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: THE PROBLEM -->
+    <section class="section-container problem-section">
+        <span class="kicker">The Problem</span>
+        <h2>Most bad land deals go wrong <br><span class="serif-italic">before the offer is signed.</span></h2>
+        
+        <div class="cards-grid">
+            <div class="info-card">
+                <i class="far fa-clock"></i>
+                <h3>The answer comes too late</h3>
+                <p>A traditional feasibility study takes days or weeks. By then the seller has another offer, or you have already fallen for the deal.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-table"></i>
+                <h3>The spreadsheet agrees with you</h3>
+                <p>A line counted twice or a missing interest cost will not flag itself. Every model looks great at nine at night.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>A good return hides a deal-killer</h3>
+                <p>Strong margins can hide a deal-killer: a flood zone, a loan the deal cannot carry, or a lot price the market will not pay.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: FEATURES -->
+    <section class="section-container features-section">
+        <span class="kicker">Features</span>
+        <h2>The slow work, <span class="serif-italic">done for you.</span></h2>
+        
+        <div class="feature-row">
+            <div class="feature-text">
+                <span class="tag">Live Public Records</span>
+                <h3>Parcel records in one search</h3>
+                <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 1.05rem;">Type an address or a tax ID. Greens Group pulls the public record for the land before you spend a dollar on it.</p>
+                <ul class="check-list">
+                    <li>Owner, tax ID, lot size and zoning from county records, nationwide</li>
+                    <li>FEMA flood zone, rated straight into the scorecard</li>
+                    <li>Our system shows every match so you pick the right one</li>
+                </ul>
+            </div>
+            <div class="feature-visual">
+                <div style="background: white; border-radius: 8px; width: 80%; height: 80%; padding: 15px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+                    <div style="background: #F3F4F6; padding: 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;"><i class="fas fa-search" style="color: var(--brand-accent);"></i> 2907861 - Collin County, TX</div>
+                    <div style="flex: 1; background: #E5E7EB; border-radius: 4px; position: relative; overflow: hidden;">
+                        <!-- Map mockup style -->
+                        <div style="position: absolute; top: -10%; left: -20%; width: 150%; height: 150%; background: #D1D5DB; opacity: 0.5;"></div>
+                        <div style="position: absolute; top: 20%; left: 30%; width: 40%; height: 40%; background: rgba(217, 119, 6, 0.25); border: 2px solid var(--brand-accent); box-shadow: 0 0 15px rgba(217, 119, 6, 0.2);"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: HOW IT WORKS -->
+    <section class="section-container how-it-works">
+        <span class="kicker">How It Works</span>
+        <h2>From raw acreage to a decision you can defend.</h2>
+        
+        <div class="split-layout">
+            <div class="stepper">
+                <div class="step active" onclick="switchStep(1)">
+                    <span class="step-num">01</span>
+                    <h3>Start with the land</h3>
+                    <p>Type an address or acreage. The Lot Estimator subtracts what you cannot build on (roads, detention, open space) and gives you a realistic lot count. Watch our engine lay out streets automatically.</p>
+                </div>
+                <div class="step" onclick="switchStep(2)">
+                    <span class="step-num">02</span>
+                    <h3>Calculate the deal</h3>
+                    <p>Input your cost assumptions and let the Greens Group engine generate a comprehensive pro forma instantly.</p>
+                </div>
+                <div class="step" onclick="switchStep(3)">
+                    <span class="step-num">03</span>
+                    <h3>Decide, then defend it</h3>
+                    <p>Export a polished, branded feasibility report to share with your equity partners and lenders.</p>
+                </div>
+            </div>
+            <div class="interactive-ui">
+                <div class="ui-header"><div class="ui-dots"><span></span><span></span><span></span></div>Greens Group · The Courts at Almeda Genoa</div>
+                <div class="ui-body">
+                    <div class="ui-table">
+                        <div class="ui-row bold"><span>Gross site area</span><span>7.50 ac</span></div>
+                        <div class="ui-row" style="color: var(--text-muted);"><span>Roads & right-of-way</span><span style="color: #DC2626;">- 18%</span></div>
+                        <div class="ui-row" style="color: var(--text-muted);"><span>Detention & drainage</span><span style="color: #DC2626;">- 7%</span></div>
+                        <div class="ui-row highlight"><span>Net developable</span><span>5.25 ac</span></div>
+                        <div style="margin-top: 24px; font-size: 3rem; font-weight: 800; line-height: 1; color: var(--brand-green);">66 <span style="font-size: 1rem; font-weight: 600; color: var(--brand-accent); text-transform: uppercase;">lots</span></div>
+                    </div>
+                    <div class="ui-graphic">
+                        <div style="position: absolute; top: 0; left: 50%; width: 6px; height: 100%; background: var(--brand-accent); opacity: 0.8; transform: translateX(-50%);"></div>
+                        <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 6px; background: var(--brand-accent); opacity: 0.8; transform: translateY(-50%);"></div>
+                        <!-- Lot grid simulation -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; width: 100%; height: 100%; padding: 10px; gap: 16px; position: relative; z-index: 2;">
+                            <div style="background: rgba(8, 51, 21, 0.1); border: 1px solid rgba(8, 51, 21, 0.2); border-radius: 4px;"></div>
+                            <div style="background: rgba(8, 51, 21, 0.1); border: 1px solid rgba(8, 51, 21, 0.2); border-radius: 4px;"></div>
+                            <div style="background: rgba(8, 51, 21, 0.1); border: 1px solid rgba(8, 51, 21, 0.2); border-radius: 4px;"></div>
+                            <div style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; margin: 10px;"></div> <!-- Pond shape -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: QUICK CHECK -->
+    <section class="quick-check-wrapper">
+        <span class="kicker" style="color: var(--brand-accent-light);">Quick Check</span>
+        <h2 class="serif-italic">Change any figure and the verdict updates as you type.</h2>
+
+        <div class="qc-container">
+            <div class="qc-form">
+                <div class="qc-header">
+                    <div>
+                        <span class="kicker" style="margin-bottom: 8px;">QUICK CHECK</span>
+                        <h3 style="font-size: 1.5rem; color: var(--brand-green);">Try it with your own numbers</h3>
+                    </div>
+                    <div class="live-badge">Live</div>
+                </div>
+                <div class="qc-toggle">
+                    <div class="qc-toggle-btn active">Land Development</div>
+                    <div class="qc-toggle-btn">Build-to-Sell</div>
+                </div>
+                <div class="qc-input-group">
+                    <label class="qc-label">Total acres</label>
+                    <input type="text" class="qc-input" placeholder="Enter acres">
+                </div>
+                <div class="qc-row qc-input-group">
+                    <div class="qc-col"><label class="qc-label">Lot width (ft)</label><input type="text" class="qc-input" value="50"></div>
+                    <div class="qc-col"><label class="qc-label">Lot depth (ft)</label><input type="text" class="qc-input" value="120"></div>
+                </div>
+                <span class="qc-helper" style="margin-top: -12px; margin-bottom: 24px; font-weight: 500;">About 7 lots per buildable acre.</span>
+                <div class="qc-row qc-input-group">
+                    <div class="qc-col"><label class="qc-label">Sale price per lot</label><input type="text" class="qc-input" placeholder="$ Enter price per lot"></div>
+                    <div class="qc-col"><label class="qc-label">Cost to develop each lot</label><input type="text" class="qc-input" value="$ 40,000"><span class="qc-helper">Typical national cost, hard and soft costs included.</span></div>
+                </div>
+                <div class="qc-input-group"><label class="qc-label">Asking price for the land</label><input type="text" class="qc-input" placeholder="$ Enter asking price"></div>
+                <div class="switch-wrap">
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                    <span>Part of the site sits in a floodway</span>
+                </div>
+            </div>
+            <div class="qc-results">
+                <div class="verdict-card">
+                    <div class="verdict-score"><span>0</span><span>of 100</span></div>
+                    <div class="verdict-text"><div class="badge">NO-GO</div><p>Add the acreage and lot price to see a verdict.</p></div>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-box"><span class="label">Lots</span><span class="value">—</span></div>
+                    <div class="stat-box"><span class="label">Net profit</span><span class="value">—</span></div>
+                    <div class="stat-box"><span class="label">Net margin</span><span class="value">—</span></div>
+                </div>
+                <div class="offer-banner"><span class="label">Maximum land offer</span><span class="value">—</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: DEAL TYPES -->
+    <section class="deal-types-wrapper">
+        <div class="section-container deal-types-layout">
+            <div class="deal-text">
+                <span class="kicker">Deal Types</span>
+                <h2>Made for land and <br>for-sale housing.</h2>
+                <p>Five deal types, one engine. Pick what you are building and Greens Group sets up the right pro forma.</p>
+                <div class="carousel-nav">
+                    <button aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+                    <button aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            <div class="deal-carousel">
+                <div class="deal-card">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80" alt="Vacant land field">
+                    <div class="deal-card-content">
+                        <div class="deal-tags"><span class="tag-small">For sale</span></div>
+                        <h3>Land Development</h3>
+                        <p>You develop finished lots and sell them to a builder. Get net margin, return on equity, and the most you should pay for the land.</p>
+                    </div>
+                </div>
+                <div class="deal-card">
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=80" alt="Aerial view of suburban neighborhood">
+                    <div class="deal-card-content">
+                        <div class="deal-tags"><span class="tag-small">For sale</span></div>
+                        <h3>Build-to-Sell</h3>
+                        <p>You build the homes and sell them. Construction cost by quality tier, buyer upgrades, and how fast the homes sell.</p>
+                    </div>
+                </div>
+                <div class="deal-card">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80" alt="Modern multifamily apartment building">
+                    <div class="deal-card-content">
+                        <div class="deal-tags">
+                            <span class="tag-small">Income</span>
+                            <span class="tag-beta">Beta</span>
+                        </div>
+                        <h3>Multifamily</h3>
+                        <p>NOI, yield on cost, debt coverage, resale value and eleven stress tests.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: CTA & FOOTER -->
+    <section class="bottom-cta">
+        <div class="cta-content">
+            <h2>Bring certainty to your next deal.</h2>
+            <p>Run a real site through Greens Group before you spend a dollar on it.</p>
+            <div class="cta-actions">
+                <a href="#" class="btn-white">Start your 14-day free trial</a>
+                <a href="#" class="btn-outline-white">Try the quick check</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="footer-logo"><i class="fas fa-sun"></i> GREENS<span>GROUP</span></a>
+                <div class="footer-tagline">Building the future, rooted in nature.</div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Quick Check</a></li>
+                    <li><a href="#">Deal Types</a></li>
+                    <li><a href="#">Metrics</a></li>
+                    <li><a href="#">Why Greens Group</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">Insights</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="#">Quick Verdict</a></li>
+                    <li><a href="#">Check Your Spreadsheet</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggles active state for the "How It Works" Section
+        function switchStep(stepIndex) {
+            const steps = document.querySelectorAll('.step');
+            steps.forEach(step => step.classList.remove('active'));
+            steps[stepIndex - 1].classList.add('active');
+        }
+
+        // Toggles active state for the "Quick Check" buttons
+        const qcToggleBtns = document.querySelectorAll('.qc-toggle-btn');
+        qcToggleBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                qcToggleBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
